@@ -26,11 +26,11 @@ file.addEventListener("change",function(){
     audioSrc.connect(analyser);  //connecting audio source to analyser
     analyser.connect(audioContext.destination);  //connecting analyser to destination i.e output speakers
     
-    analyser.fftSize = 128;
+    analyser.fftSize = 64;
     const bufferLength = analyser.frequencyBinCount;
     const dataArr = new Uint8Array(bufferLength);
 
-    const barWidth = canvas.width/45;
+    const barWidth = canvas.width/22;
     // const barWidth = canvas.width/bufferLength;
     let barHeight;
     let x ;
