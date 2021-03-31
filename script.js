@@ -30,7 +30,7 @@ file.addEventListener("change",function(){
     const bufferLength = analyser.frequencyBinCount;
     const dataArr = new Uint8Array(bufferLength);
 
-    const barWidth = canvas.width/22;
+    const barWidth = canvas.width/25;
     // const barWidth = canvas.width/bufferLength;
     let barHeight;
     let x ;
