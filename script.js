@@ -53,7 +53,7 @@ file.addEventListener("change",function(){
 function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
     for(let i = 0; i < bufferLength; i++){
         const red = 250 * (i/bufferLength);
-        const green = 0;
+        const green = 5;
         const blue = barHeight + (2 * (i/bufferLength));
 
         if(screen.width > 1200){
