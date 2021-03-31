@@ -26,12 +26,12 @@ file.addEventListener("change",function(){
     audioSrc.connect(analyser);  //connecting audio source to analyser
     analyser.connect(audioContext.destination);  //connecting analyser to destination i.e output speakers
     
-    analyser.fftSize = 2048;
+    analyser.fftSize = 128;
     const bufferLength = analyser.frequencyBinCount;
     const dataArr = new Uint8Array(bufferLength);
 
-    // const barWidth = canvas.width/170;
-    const barWidth = canvas.width/bufferLength;
+    const barWidth = canvas.width/45;
+    // const barWidth = canvas.width/bufferLength;
     let barHeight;
     let x ;
 
@@ -40,7 +40,7 @@ file.addEventListener("change",function(){
         canvasContext.clearRect(0, 0, canvas.width, canvas.height);
         analyser.getByteFrequencyData(dataArr);
 
-        drawCircle(bufferLength, x, barWidth, barHeight, dataArr);
+        drawBar(bufferLength, x, barWidth, barHeight, dataArr);
 
         requestAnimationFrame(animate);
     }
@@ -56,7 +56,24 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
         const green = 0;
         const blue = barHeight + (2 * (i/bufferLength));
 
-        barHeight = dataArr[i] * 3;
+        if(screen.width > 1200){
+
+            barHeight = dataArr[i] * 3;
+
+        }else if(screen.width > 800){
+
+            barHeight = dataArr[i] * 2;
+
+        }else if(screen.width > 600){
+
+            barHeight = dataArr[i];
+        }else{
+            barHeight = dataArr[i] / 1.2;
+        }
+
+
+
+        barHeight = dataArr[i] / 1.2;
         canvasContext.fillStyle = `rgb(${red}, ${green}, ${blue})`;
         canvasContext.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth
