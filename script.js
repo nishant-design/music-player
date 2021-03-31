@@ -53,8 +53,8 @@ file.addEventListener("change",function(){
 function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
     for(let i = 0; i < bufferLength; i++){
         const red = 250 * (i/bufferLength);
-        const green = 5;
-        const blue = barHeight + (2 * (i/bufferLength));
+        const green = 0;
+        const blue = (barWidth*3) + (2 * (i/bufferLength));
 
         if(screen.width > 1200){
 
@@ -67,13 +67,11 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
         }else if(screen.width > 600){
 
             barHeight = dataArr[i];
+            
         }else{
             barHeight = dataArr[i] / 1.2;
         }
 
-
-
-        barHeight = dataArr[i] / 1.2;
         canvasContext.fillStyle = `rgb(${red}, ${green}, ${blue})`;
         canvasContext.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth
