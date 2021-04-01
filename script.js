@@ -26,7 +26,7 @@ file.addEventListener("change",function(){
     audioSrc.connect(analyser);  //connecting audio source to analyser
     analyser.connect(audioContext.destination);  //connecting analyser to destination i.e output speakers
     
-    analyser.fftSize = 64;
+    analyser.fftSize = 32;
     const bufferLength = analyser.frequencyBinCount;
     const dataArr = new Uint8Array(bufferLength);
 
@@ -70,8 +70,6 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
             barHeight = dataArr[i] / 1.2;
         }
 
-        canvasContext.fillStyle = "white";
-        canvasContext.fillRect(canvas.width/2 - x, canvas.height - barHeight - 10, barWidth, 4);
         canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
         canvasContext.fillRect(canvas.width/2 - x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth;
@@ -96,8 +94,6 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
             barHeight = dataArr[i] / 1.2;
         }
 
-        canvasContext.fillStyle = "white";
-        canvasContext.fillRect(x, canvas.height - barHeight - 10, barWidth, 4);
         canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
         canvasContext.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth;
