@@ -23,12 +23,23 @@
 
 #audio1 {
     width: 50%;
-    margin: 50px auto;
+    margin: 50px auto 20px auto;
     display: block;
 }
 
+@media (max-width : 600px){
+    #audio1{
+        width: 94%;
+
+    }
+}
+
 #file-upload{
+    left: 50%;
+    transform: translateX(-50%);
+    border: 1px solid white;
     position: absolute;
     color: white;
     z-index: 100;
+    padding: 0.5em;
 }

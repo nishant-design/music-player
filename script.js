@@ -52,9 +52,10 @@ file.addEventListener("change",function(){
 
 function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
     for(let i = 0; i < bufferLength; i++){
-        const red = 250 * (i/bufferLength);
-        const green = 0;
-        const blue = (barWidth*3) + (2 * (i/bufferLength));
+        // const red = 250 * (i/bufferLength);
+        // const green = 0;
+        // const blue = (barWidth*3) + (2 * (i/bufferLength));
+        const hue = barHeight/i;
 
         if(screen.width > 1200){
 
@@ -72,9 +73,11 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
             barHeight = dataArr[i] / 1.2;
         }
 
-        canvasContext.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        // canvasContext.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
         canvasContext.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
-        x += barWidth
+        x += barWidth;
+        // hue += 5;
     }
 }
 
