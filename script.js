@@ -30,7 +30,7 @@ file.addEventListener("change",function(){
     const bufferLength = analyser.frequencyBinCount;
     const dataArr = new Uint8Array(bufferLength);
 
-    const barWidth = canvas.width/25;
+    const barWidth = (canvas.width/2) / bufferLength;
     // const barWidth = canvas.width/bufferLength;
     let barHeight;
     let x ;
@@ -52,9 +52,6 @@ file.addEventListener("change",function(){
 
 function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
     for(let i = 0; i < bufferLength; i++){
-        // const red = 250 * (i/bufferLength);
-        // const green = 0;
-        // const blue = (barWidth*3) + (2 * (i/bufferLength));
         const hue = barHeight/i;
 
         if(screen.width > 1200){
@@ -73,29 +70,55 @@ function drawBar(bufferLength, x , barWidth, barHeight, dataArr){
             barHeight = dataArr[i] / 1.2;
         }
 
-        // canvasContext.fillStyle = `rgb(${red}, ${green}, ${blue})`;
+        canvasContext.fillStyle = "white";
+        canvasContext.fillRect(canvas.width/2 - x, canvas.height - barHeight - 10, barWidth, 4);
+        canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
+        canvasContext.fillRect(canvas.width/2 - x, canvas.height - barHeight, barWidth, barHeight);
+        x += barWidth;
+    }
+
+    for(let i = 0; i < bufferLength; i++){
+        const hue = barHeight/i;
+
+        if(screen.width > 1200){
+
+            barHeight = dataArr[i] * 3;
+
+        }else if(screen.width > 800){
+
+            barHeight = dataArr[i] * 2;
+
+        }else if(screen.width > 600){
+
+            barHeight = dataArr[i];
+            
+        }else{
+            barHeight = dataArr[i] / 1.2;
+        }
+
+        canvasContext.fillStyle = "white";
+        canvasContext.fillRect(x, canvas.height - barHeight - 10, barWidth, 4);
         canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
         canvasContext.fillRect(x, canvas.height - barHeight, barWidth, barHeight);
         x += barWidth;
-        // hue += 5;
     }
 }
 
-function drawCircle(bufferLength, x , barWidth, barHeight, dataArr){
-    for(let i = 0; i < bufferLength; i++){
-        const hue = i;
-        const red = 250 * (i/bufferLength);
-        const green = 0;
-        const blue = barHeight + (2 * (i/bufferLength));
+// function drawCircle(bufferLength, x , barWidth, barHeight, dataArr){
+//     for(let i = 0; i < bufferLength; i++){
+//         const hue = i;
+//         const red = 250 * (i/bufferLength);
+//         const green = 0;
+//         const blue = barHeight + (2 * (i/bufferLength));
 
-        canvasContext.save();
-        canvasContext.translate(canvas.width/2, canvas.height/2);
-        canvasContext.rotate(i + Math.PI * 2/bufferLength);
+//         canvasContext.save();
+//         canvasContext.translate(canvas.width/2, canvas.height/2);
+//         canvasContext.rotate(i + Math.PI * 2/bufferLength);
 
-        barHeight =  dataArr[i]*2;
-        canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
-        canvasContext.fillRect(0, 0, barWidth, barHeight);
-        x += barWidth;
-        canvasContext.restore();
-    }
-}
+//         barHeight =  dataArr[i]*2;
+//         canvasContext.fillStyle = `hsl(${hue}, 100%, 50%)`;
+//         canvasContext.fillRect(0, 0, barWidth, barHeight);
+//         x += barWidth;
+//         canvasContext.restore();
+//     }
+// }
